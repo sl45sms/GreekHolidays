@@ -47,7 +47,37 @@ Date easter(int y){
      return new Date().parse("yyyy-M-d", easter)    
 }
 
+boolean isHoliday(Date cd){
+//http://el.wikipedia.org/wiki/Επίσημες_αργίες_στην_Ελλάδα
+//Saturday Or Sunday
+if (cd.day==6||cd.day==0) return true;
+//Standard orthodox and national 
+if (cd.month==1&&cd.date==1) return true;   //Πρωτοχρονιά
+if (cd.month==1&&cd.date==6) return true;   //Θεοφάνεια
+if (cd.month==3&&cd.date==25) return true;  //25 Μαρτίου
+if (cd.month==5&&cd.date==1) return true;   //Εργατική Πρωτομαγιά
+if (cd.month==8&&cd.date==15) return true;  //Κοίμηση της Θεοτόκου
+if (cd.month==10&&cd.date==28) return true; //Επέτειος του Όχι
+if (cd.month==11&&cd.date==17) return true; //17η Νοεμβρίου
+if (cd.month==12&&cd.date==25) return true; //Χριστούγεννα
+if (cd.month==12&&cd.date==26) return true; //Σύναξις της Θεοτόκου
+//Moving Orthodox
+def year = cd.year+1900;
+def y_easter = easter(year);
+if (cd==y_easter-48) return true; //Καθαρά Δευτέρα
+if (cd==y_easter-2) return true; //Μεγάλη Παρασκευή
+if (cd==y_easter-1) return true; //Μεγάλο Σάββατο
+if (cd==y_easter+1) return true; //Δευτέρα του Πάσχα
+if (cd==y_easter+50) return true; //Αγίου Πνεύματος
+
+return false
+}
+
+
 //Example
+td = new Date().parse("yyyy-M-d", "2014-3-3")
+println isHoliday(td);
+
 println easter(2010)
 println easter(2011)
 println easter(2012)
