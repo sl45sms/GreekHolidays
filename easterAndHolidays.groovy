@@ -74,7 +74,7 @@ return false
 }
 
 
-//Example
+//Examples
 td = new Date().parse("yyyy-M-d", "2014-3-3")
 println isHoliday(td);
 
